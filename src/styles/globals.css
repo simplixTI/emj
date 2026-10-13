@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy-900: #0a1f2f;
+    --navy: #102f46;
+    --navy-700: #1b4463;
+    --navy-600: #2a5a7e;
+    --navy-200: #a8c0d4;
+    --red: #e53e55;
+    --red-600: #c72f44;
+    --gray-50: #f3f5f7;
+    --gray-200: #dde3e9;
+    --gray-500: #5f6b76;
+    --ink: #0a1f2f;
+
+    /* The single reveal grammar. Nothing else in the site invents its own. */
+    --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur-reveal: 520ms;
+
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: #ffffff;
+    color: var(--ink);
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Browser surfaces carry the design too — these ship ugly by default. */
+  ::selection {
+    background: var(--red);
+    color: #ffffff;
+  }
+
+  :root {
+    scrollbar-color: var(--navy) var(--gray-50);
+    scrollbar-width: thin;
+  }
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--gray-50);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--navy);
+    border: 3px solid var(--gray-50);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--navy-700);
+  }
+
+  input,
+  textarea,
+  select {
+    caret-color: var(--red);
+    font-family: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  /* Dark sections need a focus ring that survives the navy ground. */
+  .on-navy :focus-visible {
+    outline-color: #ffffff;
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1.5px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: 'Barlow Condensed', Oswald, Impact, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.92;
+    text-transform: uppercase;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  /* Tables of class times must align on the digit. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 40px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .shell {
+      padding-inline: 56px;
+    }
+  }
+
+  /* The display scale. Poster-tight leading is what sells the format. */
+  .display-xl {
+    font-size: clamp(3rem, 11vw, 8.5rem);
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+  }
+  .display-lg {
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.025em;
+  }
+  .display-md {
+    font-size: clamp(2rem, 4.6vw, 3.5rem);
+    line-height: 0.95;
+  }
+  .display-sm {
+    font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+    line-height: 1;
+  }
+
+  .measure {
+    max-width: 68ch;
+  }
+
+  /* The red underscore under a key word. The one piece of brand ornament. */
+  .stroke-red {
+    position: relative;
+    display: inline-block;
+  }
+  .stroke-red::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    /* O line-height de cartaz (0.88) deixa a caixa mais curta que os glifos,
+       então o traço precisa descer para fora dela — senão vira tachado. */
+    bottom: -0.1em;
+    height: 0.075em;
+    background: var(--red);
+  }
+  /* Em corpo de texto a caixa tem altura normal e o traço volta para a base. */
+  :where(p, li, blockquote) .stroke-red::after {
+    bottom: 0.02em;
+    height: 0.09em;
+  }
+
+  .hairline-navy {
+    border-color: var(--navy-600);
+  }
+}
+
+@layer utilities {
+  .mask-rise {
+    clip-path: inset(0 0 0 0);
+  }
+  .pause-marquee:hover {
+    animation-play-state: paused;
+  }
+}
+
+/* Motion is an enhancement; the readable state is the default. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
