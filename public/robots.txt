@@ -4,4 +4,4 @@ Allow: /
 # O painel administrativo nunca deve ser indexado.
 Disallow: /admin
 
-Sitemap: https://escolamaestrojunior.com/sitemap.xml
+Sitemap: https://www.escolamaestrojunior.com.br/sitemap.xml

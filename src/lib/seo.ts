@@ -7,7 +7,7 @@ interface SeoProps {
   imagem?: string;
 }
 
-const BASE = 'https://escolamaestrojunior.com';
+const BASE = 'https://www.escolamaestrojunior.com.br';
 
 function meta(seletor: string, atributo: string, valor: string) {
   let el = document.head.querySelector<HTMLMetaElement>(seletor);
